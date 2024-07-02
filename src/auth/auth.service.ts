@@ -2,18 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { AuthLoginDto } from './dto/auth-login.dto';
 import { JwtService } from '@nestjs/jwt';
-const fakeUsers = [
-  {
-    id: 1,
-    username: 'admin',
-    password: 'admin',
-  },
-  {
-    id: 2,
-    username: 'jack',
-    password: 'password123',
-  },
-];
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -23,7 +12,7 @@ export class AuthService {
 
   async validateUser({ username, password }: AuthLoginDto): Promise<any> {
     const user = await this.userService.findOne(username);
-    // const user = fakeUsers.find((user) => user.username === username);
+
     if (user && user.password === password) {
       const { password, ...result } = user;
       return this.jwtService.sign(result);
