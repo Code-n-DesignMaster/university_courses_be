@@ -6,10 +6,10 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get('courses')
   @UseGuards(JwtAuthGuard)
-  courses() {
-    return 'courses';
+  @Get('courses/:userId')
+  async courses(@Param('userId') userId: string): Promise<string[]> {
+    return this.userService.getUserCourses({ userId });
   }
 
   @UseGuards(JwtAuthGuard)

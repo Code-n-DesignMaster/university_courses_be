@@ -26,6 +26,16 @@ export class UserService {
     return this.userModel.findOne({ username: username }).exec();
   }
 
+  async getUserCourses({ userId }: Partial<EnrollUserDto>): Promise<string[]> {
+    const user = await this.userModel
+      .findById(userId)
+      .populate('enrolledCourses')
+      .exec();
+    if (!user) throw new Error('User not found');
+
+    return user.enrolledCourses;
+  }
+
   async enrollUser({ userId, courseId }: EnrollUserDto): Promise<void> {
     const user = await this.userModel.findById(userId).exec();
     if (!user) throw new Error('User not found');
