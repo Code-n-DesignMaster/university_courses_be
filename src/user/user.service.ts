@@ -19,7 +19,9 @@ export class UserService {
     return createdCat.save();
   }
 
-  async findOne(username: string): Promise<User | undefined> {
-    return this.userModel.findOne((user) => user.username === username).exec();
+  async findOne(name: string): Promise<User | undefined> {
+    console.log('findOne', name);
+
+    return this.userModel.findOne((user) => user.name === name).exec();
   }
 }
