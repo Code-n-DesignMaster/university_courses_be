@@ -23,7 +23,7 @@ export class UserService {
   }
 
   async findOne(username: string): Promise<User | undefined> {
-    return this.userModel.findOne({ username: username }).exec();
+    return this.userModel.findOne({ username: username }).lean().exec();
   }
 
   async getUserCourses({ userId }: Partial<EnrollUserDto>): Promise<string[]> {

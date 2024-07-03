@@ -7,6 +7,7 @@ export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 
   @Get('')
+  @UseGuards(JwtAuthGuard)
   getAll(): Promise<any[]> {
     return this.courseService.getAll();
   }

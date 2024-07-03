@@ -10,6 +10,7 @@ export class AuthController {
   @Post('login')
   @UseGuards(LocalAuthGuard)
   login(@Req() req: Request) {
+    console.log('login', req);
     return req.user;
   }
 }

@@ -8,7 +8,12 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard)
   @Get('courses/:userId')
-  async courses(@Param('userId') userId: string): Promise<string[]> {
+  async courses(
+    @Param('userId') userId: string,
+    @Req() req: Request,
+  ): Promise<string[]> {
+    console.log('req', req);
+
     return this.userService.getUserCourses({ userId });
   }
 
